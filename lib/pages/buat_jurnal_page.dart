@@ -138,7 +138,7 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
                   DropdownMenuItem(value: '8', child: Text('8')),
                 ],
                 onChanged: (value) => {setState(() {
-                  mapel = value!; 
+                  jamKe = value != null ? int.parse(value) : 0;
                 })},
               ),
 
