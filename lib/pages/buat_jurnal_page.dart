@@ -162,14 +162,19 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
               // Input dimensi profil pelajar pancasila
               _textArea('Dimensi Profil Pelajar Pancasila', 'Tuliskan Dimensi Profil Pelajar Pancasila', (text) {dimensiProfilPelajarPancasila = text;}),
 
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(20),
+                    backgroundColor: Colors.lightBlueAccent,
+                  ),
                   onPressed: () => {_saveJurnal(context)},
-                  child: Text("Simpan"),
+                  label: Text("Simpan", style: TextStyle(color: Colors.black)),
+                  icon: Icon(Icons.save, color: Colors.black),
                 ),
-              )
+              ),
               // ElevatedButton(onPressed: () => {}, child: Text("Simpan")),
             ],
           ),
