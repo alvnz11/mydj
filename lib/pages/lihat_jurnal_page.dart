@@ -30,6 +30,7 @@ class _LihatJurnalPageState extends State<LihatJurnalPage> {
             Expanded(
               child: ListView.separated(
                 itemBuilder: (context, index) => ListTile(
+                  leading: Icon(Icons.book),
                   title: Text(daftarJurnal[index].kelas),
                   subtitle: Text(daftarJurnal[index].mapel),
                   trailing: Text(daftarJurnal[index].createdAt.toString()),
