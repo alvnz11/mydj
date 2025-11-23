@@ -1,5 +1,6 @@
 import 'package:mydj/data/jurnal.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mydj/data/login_info.dart';
 
 class DataProvider extends ChangeNotifier {
   final List<Jurnal> _jurnalTersimpan = [];
