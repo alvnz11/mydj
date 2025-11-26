@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mydj/components/password_field.dart';
+import 'package:mydj/data/data_provider.dart';
 import 'package:mydj/pages/simple_home_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   final String title = '';
@@ -65,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.all(20),
                           backgroundColor: Colors.lightBlue,
                         ),
-                        onPressed: () => {_openHomePage(context)},
+                        onPressed: () => {_login(context)},
                         icon: Icon(Icons.login, color: Colors.black),
                         label: Text("Login", style: TextStyle(color: Colors.black)),
                       ),
@@ -80,8 +82,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _openHomePage(BuildContext context) {
+  Future<void> _login(BuildContext context) async {
+    DataProvider provider = context.read<DataProvider>();
     if (namaPengguna == 'guru' && sandi == 'guru') {
+      await provider.saveLoginInfo(namaPengguna, sandi);
       showDialog(
         context: context,
         builder: (BuildContext context) {

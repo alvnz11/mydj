@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mydj/components/password_field.dart';
+import 'package:mydj/data/login_info.dart';
 import 'package:mydj/pages/login_page.dart';
 
 class AkunPage extends StatefulWidget {
@@ -70,7 +71,7 @@ class _AkunPageState extends State<AkunPage> {
                       padding: EdgeInsets.all(20),
                       backgroundColor: Colors.red,
                     ),
-                    onPressed: () => {_keluar()},
+                    onPressed: () => {_logout(context)},
                     icon: Icon(Icons.logout_outlined, color: Colors.black),
                     label: Text("Keluar", style: TextStyle(color: Colors.black)),
                   ),
@@ -82,12 +83,17 @@ class _AkunPageState extends State<AkunPage> {
     );
   }
 
-  void _keluar() {
+  void _keluar(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => LoginPage()
       ),
     );
+  }
+
+  Future<void> _logout(BuildContext context) async {
+    await LoginInfo.clearPreferences();
+    _keluar(context);
   }
 }

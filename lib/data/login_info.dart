@@ -38,4 +38,9 @@ class LoginInfo {
     await prefs.remove('password');
     await prefs.remove('isLoggedIn');
   }
+
+  @override 
+  String toString() {
+    return 'LoginInfo{username: $username, password: $password, isLoggedIn: $isLoggedIn}';
+  }
 }

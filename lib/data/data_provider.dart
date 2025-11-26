@@ -94,4 +94,17 @@ class DataProvider extends ChangeNotifier {
   List<Jurnal> get jurnalTersimpan{
     return List.unmodifiable(_jurnalTersimpan);
   }
+
+  Future<bool> isLoggedIn() async {
+    LoginInfo loginInfo = await LoginInfo.loadFromPreferences();
+    return loginInfo.isLoggedIn;
+  }
+
+  Future<void> saveLoginInfo(String username, String password) async {
+    LoginInfo loginInfo = await LoginInfo.loadFromPreferences();
+    loginInfo.username = username;
+    loginInfo.password = password;
+    loginInfo.isLoggedIn = true;
+    loginInfo.saveToPreferences();
+  }
 }

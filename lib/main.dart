@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mydj/pages/login_page.dart';
+import 'package:mydj/pages/startup_page.dart';
 import 'package:provider/provider.dart';
 import 'data/data_provider.dart';
 
@@ -22,7 +22,7 @@ class MyDj extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
-      home: const LoginPage(),
+      home: const StartupPage(),
     );
   }
 }
