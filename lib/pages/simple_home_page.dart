@@ -48,99 +48,104 @@ class _SimpleHomePageState extends State<SimpleHomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // Logo
-              Image.asset(
-                'assets/images/Logo.png',
-                width: 200,
-                height: 200,
-              ),
-
-              // Spacer(),
-              SizedBox(height: 20),
-
-              // Jurnal Terbaru 
-              Container(
-                height: 400,
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      'Jurnal Terbaru',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    // Logo
+                    Image.asset(
+                      'assets/images/Logo.png',
+                      width: 200,
+                      height: 200,
                     ),
+
                     SizedBox(height: 10),
-                    Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => ListTile(
-                          leading: Icon(Icons.book),
-                          title: Text(sortedJurnal[index].kelas),
-                          subtitle: Text(sortedJurnal[index].mapel),
-                          trailing: Text(sortedJurnal[index].createdAt.toString()),
-                          onTap: () => {},
-                        ),
-                        separatorBuilder: (context, index) => Divider(),
-                        itemCount: 5,
-                      ),
+
+                    // Jurnal Terbaru 
+                    Container(
+                      height: 400,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Jurnal Terbaru',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Expanded(
+                            child: ListView.separated(
+                              itemBuilder: (context, index) => ListTile(
+                                leading: Icon(Icons.book),
+                                title: Text(sortedJurnal[index].kelas),
+                                subtitle: Text(sortedJurnal[index].mapel),
+                                trailing: Text(sortedJurnal[index].createdAt.toString()),
+                                onTap: () => {},
+                              ),
+                              separatorBuilder: (context, index) => Divider(),
+                              itemCount: 4,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.all(20),
+                              ),
+                              onPressed: () => {_openLihatJurnalPage()},
+                              label: Text("Lihat Selengkapnya", style: TextStyle(color: Colors.black)),
+                            ),
+                          ),
+                        ],
+                      )
                     ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(20),
-                        ),
-                        onPressed: () => {_openLihatJurnalPage()},
-                        label: Text("Lihat Selengkapnya", style: TextStyle(color: Colors.black)),
-                      ),
-                    ),
+
+                    SizedBox(height: 20),
                   ],
-                )
-              ),
-
-              Spacer(),
-              // SizedBox(height: 160),
-
-              // Navbar
-              ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  child: NavigationBar(
-                    // selectedIndex: 0,
-                    onDestinationSelected: (index) {
-                      if (index == 0) _openLihatJurnalPage();
-                      else if (index == 1) _openBuatJurnalPage();
-                      else if (index == 2) _openAkunPage();
-                    },
-                    backgroundColor: Theme.of(context).colorScheme.inversePrimary, 
-                    destinations: [
-                      NavigationDestination(
-                        icon: Icon(Icons.list_alt),
-                        label: 'Lihat Jurnal',
-                      ),
-                      NavigationDestination(
-                        icon: Icon(Icons.add),
-                        label: 'Buat Jurnal',
-                      ),
-                      NavigationDestination(
-                        icon: Icon(Icons.account_circle),
-                        label: 'Akun',
-                      ),
-                    ],
-                  ),
                 ),
               )
-            ],
+            ),
           ),
-        )
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Container(
+                child: NavigationBar(
+                  // selectedIndex: 0,
+                  onDestinationSelected: (index) {
+                    if (index == 0) _openLihatJurnalPage();
+                    else if (index == 1) _openBuatJurnalPage();
+                    else if (index == 2) _openAkunPage();
+                  },
+                  backgroundColor: Colors.lightBlueAccent, 
+                  destinations: [
+                    NavigationDestination(
+                      icon: Icon(Icons.list_alt),
+                      label: 'Lihat Jurnal',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.add),
+                      label: 'Buat Jurnal',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.account_circle),
+                      label: 'Akun',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       )
     );
   }
