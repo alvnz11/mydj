@@ -7,6 +7,8 @@ class Jurnal {
   String materiTopikPembelajaran;
   String kegiatanPembelajaran;
   String dimensiProfilPelajarPancasila;
+  String fotoKegiatanPath = '';
+  String videoKegiatanPath = '';
 
   Jurnal({
     this.kelas = '',
@@ -16,6 +18,8 @@ class Jurnal {
     this.materiTopikPembelajaran = '',
     this.kegiatanPembelajaran = '',
     this.dimensiProfilPelajarPancasila = '',
+    this.fotoKegiatanPath = '',
+    this.videoKegiatanPath = '',
   }) : _createdAt = DateTime.now();
 
   DateTime get createdAt => _createdAt;

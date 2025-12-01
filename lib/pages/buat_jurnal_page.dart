@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mydj/components/media_selector.dart';
+import 'package:mydj/data/api_service.dart';
 import 'package:mydj/data/data_provider.dart';
 import 'package:mydj/data/jurnal.dart';
 import 'package:provider/provider.dart';
@@ -22,21 +23,23 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
   String materiTopikPembelajaran = '';
   String kegiatanPembelajaran = '';
   String dimensiProfilPelajarPancasila = '';
+  String fotoKegiatanPath = '';
+  String videoKegiatanPath = '';
 
-  void _saveJurnal(BuildContext context){
-    Jurnal jurnal = Jurnal(
-      kelas: kelas,
-      mapel: mapel,
-      jam: jamKe,
-      tujuanPembelajaran: tujuanPembelajaran,
-      materiTopikPembelajaran: materiTopikPembelajaran,
-      kegiatanPembelajaran: kegiatanPembelajaran,
-      dimensiProfilPelajarPancasila: dimensiProfilPelajarPancasila,
-    );
-    DataProvider provider = context.read<DataProvider>();
-    provider.addNew(jurnal);
+  void _uploadJurnal(BuildContext context, Jurnal jurnal) async {
+    // upload
+    try {
+      await ApiService().uploadJurnal(jurnal);
+      if(context.mounted) {
+        await _showSuccessDialog(context);
+      }
+    } catch (e) {
+      print("Error upload : $e");
+    }
+  }
 
-    showDialog(
+  Future<void> _showSuccessDialog(BuildContext context) async {
+    return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -57,6 +60,23 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
         );
       },
     );
+  }
+
+  void _saveJurnal(BuildContext context){
+    Jurnal jurnal = Jurnal(
+      kelas: kelas,
+      mapel: mapel,
+      jam: jamKe,
+      tujuanPembelajaran: tujuanPembelajaran,
+      materiTopikPembelajaran: materiTopikPembelajaran,
+      kegiatanPembelajaran: kegiatanPembelajaran,
+      dimensiProfilPelajarPancasila: dimensiProfilPelajarPancasila,
+      fotoKegiatanPath: fotoKegiatanPath,
+      videoKegiatanPath: videoKegiatanPath,
+    );
+    DataProvider provider = context.read<DataProvider>();
+    provider.addNew(jurnal);
+    _uploadJurnal(context, jurnal);
   }
 
   Widget _textArea(String label, String hint, void Function(String text) onChanged) {
@@ -166,12 +186,25 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
               SizedBox(height: 10),
               Text('Foto Kegiatan'),
               SizedBox(height: 10),
-              MediaSelector(),
+              MediaSelector(
+                onMediaChanged: (mediaPath) {
+                  setState(() {
+                    fotoKegiatanPath = mediaPath;
+                  });
+                },
+              ),
               
               SizedBox(height: 10),
               Text('Video Kegiatan'),
               SizedBox(height: 10),
-              MediaSelector(mediaType: MediaType.video),
+              MediaSelector(
+                mediaType: MediaType.video,
+                onMediaChanged: (mediaPath) {
+                  setState(() {
+                    videoKegiatanPath = mediaPath;
+                  });
+                },
+              ),
 
               SizedBox(height: 20),
               SizedBox(
