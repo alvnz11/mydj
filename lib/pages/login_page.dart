@@ -22,11 +22,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+      // appBar: AppBar(
+      //   title: Text(widget.title),
+      //   automaticallyImplyLeading: false,
+      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
